@@ -16,6 +16,8 @@ namespace PrimarchAssault.Abilities
         {
             compClass = typeof(CompAbilityEffect_DropTroops);
         }
+        
+        Bill_Production
     }
     
     public class CompAbilityEffect_DropTroops: CompAbilityEffect

@@ -96,6 +96,10 @@
         <comps>
             <li Class="PrimarchAssault.Abilities.CompProperties_DropTroops">
                 <pawnKinds>
+                    <li>GW_SM_UM_RangedTier2</li>
+                    <li>GW_SM_UM_MeleeTier2</li>
+                    <li>GW_SM_UM_RangedTier3</li>
+                    <li>GW_SM_UM_MeleeTier3</li>
                     <li>GW_SM_UM_RangedTier4</li>
                     <li>GW_SM_UM_MeleeTier4</li>
                     <li>GW_SM_UM_RangedTier5</li>
