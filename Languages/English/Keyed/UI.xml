@@ -1,0 +1,11 @@
+<LanguageData>
+    <GWPA.ResearchIncomplete>Research requirements not satisfied. Need to research: {0}</GWPA.ResearchIncomplete>
+    <GWPA.AlreadyQueued>Assault already queued.</GWPA.AlreadyQueued>
+    <GWPA.Disabled>Disabled: {0}</GWPA.Disabled>
+    <GWPA.Incoming>Incoming: {0}</GWPA.Incoming>
+    <GWPA.IncomingDescription>{0} is approaching rapidly. Brace for a fight!</GWPA.IncomingDescription>
+    <GWPA.EscapedTitle>Escaped.</GWPA.EscapedTitle>
+    <GWPA.Escaped>{0} has escaped. They are certain to return for revenge someday.</GWPA.Escaped>
+    <GWPA.GivenUpTitle>Given up.</GWPA.GivenUpTitle>
+    <GWPA.GivenUp>You have bested your foe in combat. Hopefully they have given up.</GWPA.GivenUp>
+</LanguageData>
