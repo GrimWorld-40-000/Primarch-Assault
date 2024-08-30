@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HarmonyLib;
 using RimWorld;
 using RimworldModding;
 using Verse;
@@ -10,9 +11,9 @@ namespace PrimarchAssault.External
 {
     public class Hediff_Champion: Hediff
     {
-        public List<ChampionStage> Stages = new List<ChampionStage>();
-        public ThingDef DroppedThing;
-        public ChallengeDef PhaseTwoToQueue;
+        private List<ChampionStage> _stages = new List<ChampionStage>();
+        private ThingDef _droppedThing;
+        private ChallengeDef _phaseTwoToQueue;
 
 
 
@@ -20,21 +21,32 @@ namespace PrimarchAssault.External
         private List<ChampionStage> _tmpStagesToRemove = new List<ChampionStage>();
         public void SetupHediff(ThingDef droppedThing, List<ChampionStage> stages, ChallengeDef phaseTwoToQueue = null)
         {
-            DroppedThing = droppedThing;
-            Stages = stages;
-            PhaseTwoToQueue = phaseTwoToQueue;
+            _droppedThing = droppedThing;
+            _stages = stages;
+            _phaseTwoToQueue = phaseTwoToQueue;
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Collections.Look(ref _stages, "stages", LookMode.Deep);
+            Scribe_Defs.Look(ref _droppedThing, "droppedThing");
+            Scribe_Defs.Look(ref _phaseTwoToQueue, "phaseTwoToQueue");
         }
 
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
             base.Notify_PawnDied(dinfo, culprit);
 
-            if (DroppedThing != null) GenSpawn.Spawn(DroppedThing, pawn.Position, pawn.Corpse.Map);
+            //Trigger all on-kill effects
+            _stages?.Where(stage => stage is ChampionEventStage { triggerOnChampionKilled: true }).Do(stage => stage.Apply(pawn, pawn.Corpse.Map)) ;
 
-            if (PhaseTwoToQueue != null)
+            if (_droppedThing != null) GenSpawn.Spawn(_droppedThing, pawn.Position, pawn.Corpse.Map);
+
+            if (_phaseTwoToQueue != null)
             {
-                GameComponent_ChallengeManager.Instance.StartPhaseTwo(PhaseTwoToQueue);
-                Find.LetterStack.ReceiveLetter("GWPA.EscapedTitle".Translate(), "GWPA.Escaped".Translate(PhaseTwoToQueue.championName), LetterDefOf.ThreatSmall);
+                GameComponent_ChallengeManager.Instance.StartPhaseTwo(_phaseTwoToQueue);
+                Find.LetterStack.ReceiveLetter("GWPA.EscapedTitle".Translate(), "GWPA.Escaped".Translate(_phaseTwoToQueue.championName), LetterDefOf.ThreatSmall);
             }
             else
             {
@@ -57,13 +69,13 @@ namespace PrimarchAssault.External
             //GameComponent_ChallengeManager.Instance.HealthBar.UpdateIfWilling(pawn.thingIDNumber, apparelValue, healthValue);
             
             _tmpStagesToRemove.Clear();
-            foreach (var stage in Stages.Where(stage => stage.stage > percent))
+            foreach (var stage in _stages.Where(stage => stage.stage > percent))
             {
-                stage.ApplyToPawn(pawn);
+                stage.Apply(pawn, pawn.Map);
                 _tmpStagesToRemove.Add(stage);
             }
 
-            Stages.RemoveAll(stage => _tmpStagesToRemove.Contains(stage));
+            _stages.RemoveAll(stage => _tmpStagesToRemove.Contains(stage));
         }
 
 

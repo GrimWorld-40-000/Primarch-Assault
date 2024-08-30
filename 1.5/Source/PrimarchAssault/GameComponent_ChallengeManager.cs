@@ -26,10 +26,12 @@ namespace RimworldModding
 
         private ChallengeDef _queuedPhaseOne;
         private int _queuedPhaseOneTick = -1;
-        private Dictionary<ChallengeDef, int> _queuedPhaseTwos = new Dictionary<ChallengeDef, int>();
+
+        private Dictionary<ChallengeDef, int> QueuedPhaseTwos => _queuedPhaseTwos ??= new Dictionary<ChallengeDef, int>();
+        private Dictionary<ChallengeDef, int> _queuedPhaseTwos;
         private readonly List<ChallengeDef> _tmpChallengesToDo = new List<ChallengeDef>();
-        private Dictionary<ChallengeDef, ChampionSpawnData> QueuedChampions => _queuedChampions ??= new Dictionary<ChallengeDef, ChampionSpawnData>();
-        private Dictionary<ChallengeDef, ChampionSpawnData> _queuedChampions;
+        private List<ChampionSpawnData> QueuedChampions => _queuedChampions ??= new List<ChampionSpawnData>();
+        private List<ChampionSpawnData> _queuedChampions;
         private List<ChampionTrackerData> ActiveChampions => _activeChampions ??= new List<ChampionTrackerData>();
         private List<ChampionTrackerData> _activeChampions = new List<ChampionTrackerData>();
         
@@ -40,7 +42,7 @@ namespace RimworldModding
             Scribe_Defs.Look(ref _queuedPhaseOne, "queuedPhaseOne");
             Scribe_Values.Look(ref _queuedPhaseOneTick, "queuedPhaseOneTick");
             Scribe_Collections.Look(ref _queuedPhaseTwos, "queuedPhaseTwos", LookMode.Def, LookMode.Value);
-            Scribe_Collections.Look(ref _queuedChampions, "queuedChampions", LookMode.Def, LookMode.Deep);
+            Scribe_Collections.Look(ref _queuedChampions,  "queuedChampions", true, LookMode.Deep);
             base.ExposeData();
         }
 
@@ -76,7 +78,7 @@ namespace RimworldModding
                 return false;
             }
 
-            return !_queuedPhaseTwos.ContainsKey(def);
+            return !QueuedPhaseTwos.ContainsKey(def);
         }
 
         public void StartPhaseOne(ChallengeDef def)
@@ -87,7 +89,7 @@ namespace RimworldModding
         
         public void StartPhaseTwo(ChallengeDef def)
         {
-            _queuedPhaseTwos[def] = Find.TickManager.TicksGame + def.ticksUntilRevenge.RandomInRange;
+            QueuedPhaseTwos[def] = Find.TickManager.TicksGame + def.ticksUntilRevenge.RandomInRange;
         }
 
         public override void GameComponentTick()
@@ -98,51 +100,55 @@ namespace RimworldModding
             if (IsPhaseOneQueued && tickNow > _queuedPhaseOneTick)
             {
                 _queuedPhaseOne.FirePhaseOne();
-                QueuedChampions.Add(_queuedPhaseOne, new ChampionSpawnData(Find.TickManager.TicksGame + _queuedPhaseOne.ticksUntilChampionArrives, false));
+                QueuedChampions.Add(new ChampionSpawnData(Find.TickManager.TicksGame + _queuedPhaseOne.ticksUntilChampionArrives, false, _queuedPhaseOne));
                 _queuedPhaseOne = null;
             }
             
             _tmpChallengesToDo.Clear();
             
-            foreach (var (challengeDef, tick) in _queuedPhaseTwos)
+            foreach (var (challengeDef, tick) in QueuedPhaseTwos)
             {
                 if (tickNow <= tick) continue;
                 challengeDef.FirePhaseTwo();
-                QueuedChampions.Add(challengeDef, new ChampionSpawnData(Find.TickManager.TicksGame + challengeDef.ticksUntilChampionArrives, true));
+                QueuedChampions.Add(new ChampionSpawnData(Find.TickManager.TicksGame + challengeDef.ticksUntilChampionArrives, true, challengeDef));
                 _tmpChallengesToDo.Add(challengeDef);
             }
 
             foreach (ChallengeDef challengeDef in _tmpChallengesToDo)
             {
-                _queuedPhaseTwos.Remove(challengeDef);
+                QueuedPhaseTwos.Remove(challengeDef);
             }
 
             if (QueuedChampions.NullOrEmpty()) return;
-            var (challenge, data) = QueuedChampions.First();
+            var data = QueuedChampions.First();
 
+            
+            
             if (tickNow <= data.TickToSpawn) return;
-            challenge.SpawnChampion(data.IsPhaseTwo? null: challenge, data.IsPhaseTwo? challenge.championDrop: null);
-            QueuedChampions.Remove(challenge);
+            data.ChallengeDef.SpawnChampion(data.IsPhaseTwo? null: data.ChallengeDef, data.IsPhaseTwo? data.ChallengeDef.championDrop: null);
+            QueuedChampions.Remove(data);
         }
 
         public void StartAllPhaseTwos()
         {
-            List <ChallengeDef> challenges = _queuedPhaseTwos.Keys.ToList();
+            List <ChallengeDef> challenges = QueuedPhaseTwos.Keys.ToList();
             foreach (var challengeDef in challenges)
             {
-                _queuedPhaseTwos[challengeDef] = Find.TickManager.TicksGame;
+                QueuedPhaseTwos[challengeDef] = Find.TickManager.TicksGame;
             }
         }
     }
 
-    public class ChampionSpawnData(int tickToSpawn, bool isPhaseTwo) : IExposable
+    public class ChampionSpawnData(int tickToSpawn, bool isPhaseTwo, ChallengeDef challengeDef) : IExposable
     {
         public int TickToSpawn = tickToSpawn;
         public bool IsPhaseTwo = isPhaseTwo;
+        public ChallengeDef ChallengeDef = challengeDef;
         public void ExposeData()
         {
             Scribe_Values.Look(ref TickToSpawn, "ticksToSpawn");
             Scribe_Values.Look(ref IsPhaseTwo, "isPhaseTwo");
+            Scribe_Values.Look(ref ChallengeDef, "challengeDef");
         }
     }
 

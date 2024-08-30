@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HarmonyLib;
 using RimWorld;
 using RimworldModding;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace PrimarchAssault.External
 
         public List<ChampionAbilityStage> abilityStages;
         public List<ChampionHediffStage> hediffStages;
+        public List<ChampionEventStage> eventStages;
         public ThingDef championDrop;
 
         public SoundDef announcementSound;
@@ -199,6 +201,10 @@ namespace PrimarchAssault.External
             {
                 stages.AddRange(hediffStages);
             }
+            if (eventStages != null)
+            {
+                stages.AddRange(eventStages);
+            }
             
             championHediff.SetupHediff(championsChampionDrop, stages, phaseTwo);
             champion.health.AddHediff(championHediff);
@@ -255,6 +261,9 @@ namespace PrimarchAssault.External
             LordMaker.MakeNewLord(faction, new LordJob_AssaultColony(), map, allOfFaction);
             
             GameComponent_ChallengeManager.Instance.RegisterActiveChampion(champion.thingIDNumber, this);
+            
+            
+            eventStages?.DoIf(stage => stage.triggerOnChampionArrive, stage => stage.Apply(null, map));
         }
 
         private void SpawnAssault(bool useCenterByDefault, WaveDetails details)
@@ -306,10 +315,11 @@ namespace PrimarchAssault.External
                 }
             }
 
-            //TODO make this a unique lord?
             LordMaker.MakeNewLord(faction, new LordJob_AssaultColony(), map, pawnsToGenerate);
             
             Find.LetterStack.ReceiveLetter(LabelCap, arrivalText, LetterDefOf.ThreatBig, new LookTargets(pawnsToGenerate));
+
+            eventStages?.DoIf(stage => stage.triggerOnAssaultStart, stage => stage.Apply(null, map));
         }
 
         

@@ -114,7 +114,7 @@
             </li>
         </escortWavesInPriority>
 
-        <championFlinchSeverity>0.2</championFlinchSeverity>
+        <championFlinchSeverity>0.3</championFlinchSeverity>
         
         <championDrop>PASS_LionSTC</championDrop>
 
@@ -135,6 +135,13 @@
                 </hediffsToGain>
             </li>
         </hediffStages>
+
+        <eventStages>
+            <li>
+                <triggerOnAssaultStart>true</triggerOnAssaultStart>
+                <assaultEventDef>GWPA_ShortEMP</assaultEventDef>
+            </li>
+        </eventStages>
 
     </PrimarchAssault.External.ChallengeDef>
     
@@ -251,7 +258,7 @@
             </li>
         </escortWavesInPriority>
 
-        <championFlinchSeverity>0.2</championFlinchSeverity>
+        <championFlinchSeverity>0.3</championFlinchSeverity>
         
         <championDrop>PASS_GuillimanSTC</championDrop>
 
@@ -279,6 +286,13 @@
                 </abilitiesToGain>
             </li>
         </abilityStages>
+
+        <eventStages>
+            <li>
+                <triggerOnAssaultStart>true</triggerOnAssaultStart>
+                <assaultEventDef>GWPA_ShortEMP</assaultEventDef>
+            </li>
+        </eventStages>
 
 
     </PrimarchAssault.External.ChallengeDef>

@@ -1,0 +1,13 @@
+<Defs>
+    <PrimarchAssault.External.AssaultEventDef>
+        <defName>GWPA_ShortEMP</defName>
+        <label>short emp</label>
+        <actionProperties>
+            <li Class="RimworldModding.AssaultEvent.GameConditionEventProperties">
+                <!-- 30 seconds -->
+                <tickDuration>1800</tickDuration>
+                <condition>GWPA_EMPNet</condition>
+            </li>
+        </actionProperties>
+    </PrimarchAssault.External.AssaultEventDef>
+</Defs>

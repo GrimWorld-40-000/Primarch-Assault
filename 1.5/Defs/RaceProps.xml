@@ -1,5 +1,5 @@
 <Defs>
-    <ThingDef Name="Primarch" ParentName="Human">
+    <ThingDef Name="GWPA_Primarch" ParentName="Human">
         <defName>GWPA_PrimarchRace</defName>
         <label>primarch</label>
         <description>A genetically engineered son of the God Emperor of Man.</description>
@@ -19,9 +19,10 @@
         <comps>
             <li Class="CompProperties_Shield">
                 <maxDrawSize>2.5</maxDrawSize>
-                <energyLossPerDamage>0.005</energyLossPerDamage>
+                <energyLossPerDamage>0.0025</energyLossPerDamage>
                 <blocksRangedWeapons>false</blocksRangedWeapons>
-                <startingTicksToReset>6400</startingTicksToReset>
+                <!--Vulnerable for 20 seconds-->
+                <startingTicksToReset>1200</startingTicksToReset>
             </li>
         </comps>
     </ThingDef>
