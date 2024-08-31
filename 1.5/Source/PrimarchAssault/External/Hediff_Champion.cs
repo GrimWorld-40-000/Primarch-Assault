@@ -63,10 +63,19 @@ namespace PrimarchAssault.External
         public override void Tick()
         {
             base.Tick();
-            if (!pawn.IsHashIntervalTick(100)) return;
-            float percent = GetChampionStage(out float apparelValue, out float healthValue);
+            float percent = GetChampionStage(out float shieldValue, out float healthValue);
+
+            if (pawn.TryGetComp(out CompShield shield))
+            {
+                shieldValue = shield.Energy / pawn.GetStatValue(StatDefOf.EnergyShieldEnergyMax);
+            }
             
-            //GameComponent_ChallengeManager.Instance.HealthBar.UpdateIfWilling(pawn.thingIDNumber, apparelValue, healthValue);
+            GameComponent_ChallengeManager.Instance.HealthBar.UpdateIfWilling(pawn.thingIDNumber, healthValue, shieldValue);
+            
+            
+            
+            
+            if (!pawn.IsHashIntervalTick(100)) return;
             
             _tmpStagesToRemove.Clear();
             foreach (var stage in _stages.Where(stage => stage.stage > percent))

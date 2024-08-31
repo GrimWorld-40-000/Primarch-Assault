@@ -14,11 +14,9 @@ namespace RimworldModding
         public GameComponent_ChallengeManager(Game game)
         {
             _game = game;
-
-            //HealthBar = new HealthBarWindow();
         }
 
-        //public HealthBarWindow HealthBar;
+        public readonly HealthBarWindow HealthBar = new HealthBarWindow();
 
         public static GameComponent_ChallengeManager Instance => _game.GetComponent<GameComponent_ChallengeManager>();
 
@@ -49,9 +47,10 @@ namespace RimworldModding
         public void RegisterActiveChampion(int champion, ChallengeDef challenge)
         {
             ActiveChampions.Add(new ChampionTrackerData(champion, challenge));
-            //HealthBar.ChallengeDef = challenge;
-            //HealthBar.CurrentPawn = champion;
-            //Find.WindowStack.Add(HealthBar); 
+            HealthBar.ChallengeDef = challenge;
+            HealthBar.CurrentPawn = champion;
+            Find.WindowStack.Add(HealthBar); 
+            HealthBar.windowRect.y = 30;
         }
         
         public void RemoveActiveChampion(int champion)
@@ -59,7 +58,7 @@ namespace RimworldModding
             ActiveChampions.RemoveWhere(data => data?.Champion == champion || data == null);
             if (ActiveChampions.Empty())
             {
-                //HealthBar.Close();
+                HealthBar.Close();
             }
         }
 
@@ -97,6 +96,32 @@ namespace RimworldModding
             base.GameComponentTick();
             int tickNow = Find.TickManager.TicksGame;
             if (tickNow % 200 != 0) return;
+
+            if (ActiveChampions.Any())
+            {
+                if (!HealthBar.IsOpen)
+                {
+                    ChampionTrackerData championData = ActiveChampions.First();
+
+                    if (championData == null)
+                    {
+                        ActiveChampions.RemoveAt(0);
+                    }
+                    else
+                    {
+                        HealthBar.ChallengeDef = championData.Challenge;
+                        HealthBar.CurrentPawn = championData.Champion;
+                        Find.WindowStack.Add(HealthBar); 
+                        HealthBar.windowRect.y = 30;
+                    }
+                }
+            }
+            else
+            {
+                HealthBar.Close();
+            }
+            
+            
             if (IsPhaseOneQueued && tickNow > _queuedPhaseOneTick)
             {
                 _queuedPhaseOne.FirePhaseOne();
@@ -120,12 +145,20 @@ namespace RimworldModding
             }
 
             if (QueuedChampions.NullOrEmpty()) return;
-            var data = QueuedChampions.First();
-
             
+            var data = QueuedChampions.First();
+            
+            if (data == null)
+            {
+                Log.Error("Champion spawn data was null. Champion cannot spawn.");
+                QueuedChampions.RemoveAt(0);
+                return;
+            }
             
             if (tickNow <= data.TickToSpawn) return;
+            
             data.ChallengeDef.SpawnChampion(data.IsPhaseTwo? null: data.ChallengeDef, data.IsPhaseTwo? data.ChallengeDef.championDrop: null);
+            
             QueuedChampions.Remove(data);
         }
 
@@ -139,23 +172,46 @@ namespace RimworldModding
         }
     }
 
-    public class ChampionSpawnData(int tickToSpawn, bool isPhaseTwo, ChallengeDef challengeDef) : IExposable
+    public class ChampionSpawnData : IExposable
     {
-        public int TickToSpawn = tickToSpawn;
-        public bool IsPhaseTwo = isPhaseTwo;
-        public ChallengeDef ChallengeDef = challengeDef;
+        public ChampionSpawnData()
+        {
+            
+        }
+        
+        public ChampionSpawnData(int tickToSpawn, bool isPhaseTwo, ChallengeDef challengeDef)
+        {
+            TickToSpawn = tickToSpawn;
+            IsPhaseTwo = isPhaseTwo;
+            ChallengeDef = challengeDef;
+        }
+        
+        public int TickToSpawn;
+        public bool IsPhaseTwo;
+        public ChallengeDef ChallengeDef;
         public void ExposeData()
         {
             Scribe_Values.Look(ref TickToSpawn, "ticksToSpawn");
             Scribe_Values.Look(ref IsPhaseTwo, "isPhaseTwo");
-            Scribe_Values.Look(ref ChallengeDef, "challengeDef");
+            Scribe_Defs.Look(ref ChallengeDef, "challengeDef");
         }
     }
 
-    public class ChampionTrackerData(int champion, ChallengeDef challenge) : IExposable
+    public class ChampionTrackerData : IExposable
     {
-        public int Champion = champion;
-        public ChallengeDef Challenge = challenge;
+        public ChampionTrackerData()
+        {
+            
+        }
+        
+        public ChampionTrackerData(int champion, ChallengeDef challenge)
+        {
+            Champion = champion;
+            Challenge = challenge;
+        }
+
+        public int Champion;
+        public ChallengeDef Challenge;
         public void ExposeData()
         {
             Scribe_Values.Look(ref Champion, "champion");

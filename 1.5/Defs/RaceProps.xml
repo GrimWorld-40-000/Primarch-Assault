@@ -19,7 +19,7 @@
         <comps>
             <li Class="CompProperties_Shield">
                 <maxDrawSize>2.5</maxDrawSize>
-                <energyLossPerDamage>0.0025</energyLossPerDamage>
+                <energyLossPerDamage>0.0005</energyLossPerDamage>
                 <blocksRangedWeapons>false</blocksRangedWeapons>
                 <!--Vulnerable for 20 seconds-->
                 <startingTicksToReset>1200</startingTicksToReset>
