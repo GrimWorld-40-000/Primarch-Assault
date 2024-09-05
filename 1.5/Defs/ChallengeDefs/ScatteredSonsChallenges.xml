@@ -53,16 +53,16 @@
                     <li>GW_SM_DA_RangedTier3</li>
                     <li>GW_SM_DA_MeleeTier3</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
-                <wealthMultiplier>.05</wealthMultiplier>
+                <wealthCap>500000</wealthCap>
+                <wealthMultiplier>.02</wealthMultiplier>
             </li>
             <!--Fallback to ancient soldiers-->
             <li>
                 <pawnKinds>
                     <li>AncientSoldier</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
-                <wealthMultiplier>.05</wealthMultiplier>
+                <wealthCap>500000</wealthCap>
+                <wealthMultiplier>.02</wealthMultiplier>
             </li>
         </phaseOneWavesInPriority>
         <phaseTwoWavesInPriority>
@@ -74,7 +74,7 @@
                     <li>GW_TotE_Castellan</li>
                 </pawnKinds>
                 <flinchSeverity>0.01</flinchSeverity>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
             <li MayRequire="HappyPurging.AgeofDarkness">
@@ -84,7 +84,7 @@
                     <li>GW_SM_DA_RangedTier5</li>
                     <li>GW_SM_DA_MeleeTier5</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
             <!--Fallback to ancient soldiers-->
@@ -92,7 +92,7 @@
                 <pawnKinds>
                     <li>AncientSoldier</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
         </phaseTwoWavesInPriority>
@@ -218,16 +218,16 @@
                     <li>GW_SM_UM_RangedTier3</li>
                     <li>GW_SM_UM_MeleeTier3</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
-                <wealthMultiplier>.05</wealthMultiplier>
+                <wealthCap>500000</wealthCap>
+                <wealthMultiplier>.02</wealthMultiplier>
             </li>
             <!--Fallback to ancient soldiers-->
             <li>
                 <pawnKinds>
                     <li>AncientSoldier</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
-                <wealthMultiplier>.05</wealthMultiplier>
+                <wealthCap>500000</wealthCap>
+                <wealthMultiplier>.02</wealthMultiplier>
             </li>
         </phaseOneWavesInPriority>
         <phaseTwoWavesInPriority>
@@ -239,7 +239,7 @@
                     <li>GW_TotE_Castellan</li>
                 </pawnKinds>
                 <flinchSeverity>0.01</flinchSeverity>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
             <li MayRequire="HappyPurging.AgeofDarkness">
@@ -249,7 +249,7 @@
                     <li>GW_SM_UM_RangedTier5</li>
                     <li>GW_SM_UM_MeleeTier5</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
             <!--Fallback to ancient soldiers-->
@@ -257,7 +257,7 @@
                 <pawnKinds>
                     <li>AncientSoldier</li>
                 </pawnKinds>
-                <wealthCap>1000000</wealthCap>
+                <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
         </phaseTwoWavesInPriority>

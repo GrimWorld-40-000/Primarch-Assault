@@ -94,6 +94,7 @@
     <PrimarchAssault.External.AssaultEventDef>
         <defName>GWPA_StandardAnyEvent</defName>
         <label>random standard event</label>
+        <triggerAllActions>false</triggerAllActions>
         <actionProperties>
             <li Class="PrimarchAssault.AssaultEvent.GameConditionEventProperties">
                 <!-- 480 seconds -->
