@@ -2,7 +2,7 @@ using System;
 using RimWorld;
 using Verse;
 
-namespace RimworldModding.AssaultEvent
+namespace PrimarchAssault.AssaultEvent
 {
     public class GameConditionEventProperties : AssaultEventActionProperties
     {
@@ -16,6 +16,7 @@ namespace RimworldModding.AssaultEvent
         private GameConditionEventProperties Props => (GameConditionEventProperties) props;
         public override void Apply(Map map)
         {
+            base.Apply(map);
             map.gameConditionManager.RegisterCondition(GameConditionMaker.MakeCondition(Props.condition, Props.tickDuration));
         }
     }

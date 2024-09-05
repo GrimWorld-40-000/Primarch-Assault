@@ -5,7 +5,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace RimworldModding
+namespace PrimarchAssault
 {
     public class GameComponent_ChallengeManager : GameComponent
     {
@@ -51,6 +51,7 @@ namespace RimworldModding
             HealthBar.CurrentPawn = champion;
             Find.WindowStack.Add(HealthBar); 
             HealthBar.windowRect.y = 30;
+            HealthBar.windowRect.x = Current.Camera.scaledPixelWidth / (float)2 - 1000;
         }
         
         public void RemoveActiveChampion(int champion)

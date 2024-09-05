@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using RimWorld;
-using RimworldModding.AssaultEvent;
+using PrimarchAssault.AssaultEvent;
 using Verse;
 
 namespace PrimarchAssault.External
@@ -22,21 +23,20 @@ namespace PrimarchAssault.External
             InitializeComps();
         }
 
-        
-        
-        public void InitializeComps()
+
+        private void InitializeComps()
         {
             Actions = new List<AssaultEventAction>();
             if (actionProperties.NullOrEmpty()) return;
-            for (int index = 0; index < actionProperties.Count; ++index)
+            foreach (var t in actionProperties)
             {
                 AssaultEventAction action = null;
                 try
                 {
-                    action = (AssaultEventAction) Activator.CreateInstance(actionProperties[index].AssaultEventClass());
+                    action = (AssaultEventAction) Activator.CreateInstance(t.AssaultEventClass());
                     action.parent = this;
                     Actions.Add(action);
-                    action.Initialize(actionProperties[index]);
+                    action.Initialize(t);
                 }
                 catch (Exception ex)
                 {
@@ -50,14 +50,20 @@ namespace PrimarchAssault.External
         {
             if (triggerAllActions)
             {
-                foreach (AssaultEventAction assaultEventAction in Actions)
+                foreach (AssaultEventAction assaultEventAction in Actions.Where(assaultEventAction => assaultEventAction.Enabled))
                 {
                     assaultEventAction.Apply(map);
                 }
             }
             else
             {
-                Actions.RandomElement().Apply(map);
+                List<AssaultEventAction> validActions =
+                    Actions.Where(assaultEventAction => assaultEventAction.Enabled).ToList();
+
+                if (validActions.Any())
+                {
+                    Actions.RandomElement().Apply(map);
+                }
             }
         }
     }

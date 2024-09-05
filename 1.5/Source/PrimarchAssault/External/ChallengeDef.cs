@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using HarmonyLib;
 using RimWorld;
-using RimworldModding;
+using PrimarchAssault;
 using UnityEngine;
 using Verse;
 using Verse.AI.Group;
@@ -21,6 +21,8 @@ namespace PrimarchAssault.External
         public string arrivalText;
 
         public string championName;
+
+        public List<SongDef> playlist;
 
         public ChampionDetails championDetails;
 
@@ -136,13 +138,11 @@ namespace PrimarchAssault.External
 
         public void FirePhaseOne()
         {
-            announcementSound.PlayOneShotOnCamera();
             SpawnAssault(false, phaseOneWavesInPriority.First());
         }
         
         public void FirePhaseTwo()
         {
-            announcementSound.PlayOneShotOnCamera();
             SpawnAssault(true, phaseTwoWavesInPriority.First());
         }
 
@@ -173,6 +173,8 @@ namespace PrimarchAssault.External
 
         public void SpawnChampion(ChallengeDef phaseTwo, ThingDef championsChampionDrop)
         {
+            announcementSound.PlayOneShotOnCamera();
+            
             Map map = Find.AnyPlayerHomeMap;
             Faction faction = championDetails.GetFirstValidFactionOrNull();
             
@@ -271,7 +273,11 @@ namespace PrimarchAssault.External
             Map map = Find.AnyPlayerHomeMap;
             Find.TickManager.slower.SignalForceNormalSpeedShort();
             Faction faction = championDetails.GetFirstValidFactionOrNull();
-
+            
+              
+            Find.MusicManagerPlay.ForcePlaySong(playlist.RandomElement(), false);
+            
+            
             if (!faction.HostileTo(Faction.OfPlayer))
             {
                 faction.TryAffectGoodwillWith(Faction.OfPlayer, -200);

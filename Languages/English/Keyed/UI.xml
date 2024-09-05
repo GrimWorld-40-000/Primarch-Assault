@@ -8,4 +8,6 @@
     <GWPA.Escaped>{0} has escaped. They are certain to return for revenge someday.</GWPA.Escaped>
     <GWPA.GivenUpTitle>Given up.</GWPA.GivenUpTitle>
     <GWPA.GivenUp>You have bested your foe in combat. Hopefully they have given up.</GWPA.GivenUp>
+    
+    <GWPA.HealthbarMoveable>Is healthbar moveable?</GWPA.HealthbarMoveable> 
 </LanguageData>

@@ -5,7 +5,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
-namespace RimworldModding
+namespace PrimarchAssault
 {
     public static class ChallengeUtilities
     {

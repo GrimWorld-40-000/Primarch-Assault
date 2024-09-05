@@ -12,6 +12,9 @@
         <effectorDef>GWPA_PrimarchAssaultStarted</effectorDef>
         <arrivalText>The Lion is here! Prepare to fight!</arrivalText>
         <announcementSound>GWPA_LionIntro</announcementSound>
+        <playlist>
+            <li>GWPA_PrimarchAssault</li>
+        </playlist>
         <championDetails>
             <forcedName>Lion</forcedName>
             <forcedLastname>El'Jonson</forcedLastname>
@@ -141,6 +144,24 @@
                 <triggerOnAssaultStart>true</triggerOnAssaultStart>
                 <assaultEventDef>GWPA_ShortEMP</assaultEventDef>
             </li>
+        
+            <li>
+                <stage>.95</stage>
+                <assaultEventDef>GWPA_TeleportIntoMountainBase</assaultEventDef>
+            </li>
+
+            <li>
+                <stage>.75</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
+            </li>
+            <li>
+                <stage>.5</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
+            </li>
+            <li>
+                <stage>.25</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
+            </li>
         </eventStages>
 
     </PrimarchAssault.External.ChallengeDef>
@@ -158,6 +179,9 @@
         <effectorDef>GWPA_PrimarchAssaultStarted</effectorDef>
         <arrivalText>Guilliman is here! Prepare to fight!</arrivalText>
         <announcementSound>GWPA_GuillimanIntro</announcementSound>
+        <playlist>
+            <li>GWPA_PrimarchAssault</li>
+        </playlist>
         <championDetails>
             <forcedName>Roboute</forcedName>
             <forcedLastname>Guilliman</forcedLastname>
@@ -291,6 +315,24 @@
             <li>
                 <triggerOnAssaultStart>true</triggerOnAssaultStart>
                 <assaultEventDef>GWPA_ShortEMP</assaultEventDef>
+            </li>
+        
+            <li>
+                <stage>.95</stage>
+                <assaultEventDef>GWPA_TeleportIntoMountainBase</assaultEventDef>
+            </li>
+
+            <li>
+                <stage>.75</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
+            </li>
+            <li>
+                <stage>.5</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
+            </li>
+            <li>
+                <stage>.25</stage>
+                <assaultEventDef>GWPA_StandardAnyEvent</assaultEventDef>
             </li>
         </eventStages>
 

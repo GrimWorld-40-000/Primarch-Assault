@@ -42,6 +42,10 @@
           <HintPath>..\..\..\..\..\..\..\..\..\RimworldModding\References\Assembly-CSharp.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="GrimWorld_Framework">
+          <HintPath>..\..\..\..\GrimWorld-Framework\1.5\Assemblies\GrimWorld_Framework.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
@@ -72,19 +76,29 @@
         <Compile Include="AssaultEvent\AssaultEventAction.cs" />
         <Compile Include="AssaultEvent\AssaultEventActionProperties.cs" />
         <Compile Include="AssaultEvent\GameConditionEvent.cs" />
+        <Compile Include="AssaultEvent\GiveHediffEvent.cs" />
+        <Compile Include="AssaultEvent\RefillShieldsEvent.cs" />
+        <Compile Include="AssaultEvent\TeleportIntoMountainEvent.cs" />
         <Compile Include="ChallengeUtilities.cs" />
         <Compile Include="DebugActions.cs" />
         <Compile Include="External\AssaultEventDef.cs" />
         <Compile Include="External\ChallengeDef.cs" />
         <Compile Include="External\ChampionDetails.cs" />
+        <Compile Include="External\HediffComp_PsychicStormSuppression.cs" />
         <Compile Include="External\Hediff_ArmorFlinch.cs" />
         <Compile Include="External\Hediff_Champion.cs" />
         <Compile Include="External\WaveDetails.cs" />
         <Compile Include="GameComponent_ChallengeManager.cs" />
+        <Compile Include="GameConditions\BombardmentParent.cs" />
+        <Compile Include="GameConditions\LaserBombardment.cs" />
+        <Compile Include="GameConditions\OrbitalBombardment.cs" />
+        <Compile Include="GameConditions\PsychicStorm.cs" />
         <Compile Include="HealthBarWindow.cs" />
         <Compile Include="PADefsOf.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="External\Comp_SummoningFocus.cs" />
+        <Compile Include="Settings\SettingsRecord_PrimarchAssault.cs" />
+        <Compile Include="Settings\SettingsTabRecord_PrimarchAssault.cs" />
         <Compile Include="Stages.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

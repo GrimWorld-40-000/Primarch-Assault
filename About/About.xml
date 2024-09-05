@@ -23,5 +23,9 @@
 		<li>Grimworld.Core</li>
 	</loadAfter>
 
-	<description>Adds a framework for summoning challenging enemies that give a hefty reward.</description>
+	<description>
+		Adds a framework for summoning challenging enemies that give a hefty reward.
+
+		Primarch Assault them by Luis Humanoide on Youtube.
+	</description>
 </ModMetaData>

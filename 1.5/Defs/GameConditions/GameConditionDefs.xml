@@ -10,7 +10,42 @@
         <canBePermanent>false</canBePermanent>
         <allowUnderground>false</allowUnderground>
         <silencedByConditions>
-          <li MayRequire="Ludeon.RimWorld.Anomaly">UnnaturalDarkness</li>
+            <li MayRequire="Ludeon.RimWorld.Anomaly">UnnaturalDarkness</li>
         </silencedByConditions>
+    </GameConditionDef>
+
+    
+    <GameConditionDef>
+        <defName>GWPA_OrbitalBombardment</defName>
+        <conditionClass>PrimarchAssault.GameConditions.OrbitalBombardment</conditionClass>
+        <label>orbital bombardement</label>
+        <description>An orbital bombardment is targeting your colony.</description>
+        <endMessage>The orbital bombardment is ending.</endMessage>
+        <letterText>An orbital bombardment is ravaging your colony. Your only option is to wait until they run out of ammo.</letterText>
+        <letterDef>NegativeEvent</letterDef>
+        <canBePermanent>false</canBePermanent>
+    </GameConditionDef>
+    
+    <GameConditionDef>
+        <defName>GWPA_LaserBombardment</defName>
+        <conditionClass>PrimarchAssault.GameConditions.LaserBombardment</conditionClass>
+        <label>laser bombardement</label>
+        <description>A laser bombardment is targeting your colony.</description>
+        <endMessage>The laser bombardment is ending.</endMessage>
+        <letterText>A laser bombardment is ravaging your colony. Your only option is to wait until they run out of power.</letterText>
+        <letterDef>NegativeEvent</letterDef>
+        <canBePermanent>false</canBePermanent>
+    </GameConditionDef>
+
+    <GameConditionDef>
+        <defName>GWPA_PsychicStorm</defName>
+        <conditionClass>PrimarchAssault.GameConditions.PsychicStorm</conditionClass>
+        <label>psychic storm</label>
+        <description>A psychic storm will reduce consciousness and build up neural heat of your pawns. The effect is modulated by an individual's psychic sensitivity.</description>
+        <endMessage>The psychic storm has dissipated.</endMessage>
+        <letterText></letterText>
+        <letterDef>NegativeEvent</letterDef>
+        <canBePermanent>false</canBePermanent>
+        <natural>false</natural>
       </GameConditionDef>
 </Defs>

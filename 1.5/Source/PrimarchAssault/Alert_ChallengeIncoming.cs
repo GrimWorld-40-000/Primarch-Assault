@@ -1,7 +1,7 @@
 using RimWorld;
 using Verse;
 
-namespace RimworldModding
+namespace PrimarchAssault
 {
     public class Alert_ChallengeIncoming: Alert_Critical
     {

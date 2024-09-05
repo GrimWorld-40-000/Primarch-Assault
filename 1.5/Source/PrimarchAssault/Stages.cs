@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using AbilityDef = RimWorld.AbilityDef;
 
-namespace RimworldModding
+namespace PrimarchAssault
 {
     public abstract class ChampionStage: IExposable
     {

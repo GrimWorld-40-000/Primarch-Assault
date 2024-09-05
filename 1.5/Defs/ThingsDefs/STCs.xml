@@ -37,19 +37,19 @@
     <ThingDef ParentName="GWPA_ChampionSTCBase" MayRequire="grimworld.scatteredsons">
         <defName>PASS_LionSTC</defName>
         <label>Lion's STC fragment</label>
-        <uiIconPath>Icons/Lion</uiIconPath>
+        <uiIconPath>STCs/DAComponent/DAComponent_a</uiIconPath>
         <graphicData>
-            <texPath>Icons/Lion</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
+            <texPath>STCs/DAComponent</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
         </graphicData>
     </ThingDef>
     <ThingDef ParentName="GWPA_ChampionSTCBase" MayRequire="grimworld.scatteredsons">
         <defName>PASS_GuillimanSTC</defName>
         <label>Guilliman's STC fragment</label>
-        <uiIconPath>Icons/Guilliman</uiIconPath>
+        <uiIconPath>STCs/UMComponent/UMComponent_a</uiIconPath>
         <graphicData>
-            <texPath>Icons/Guilliman</texPath>
-            <graphicClass>Graphic_Single</graphicClass>
+            <texPath>STCs/UMComponent</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
         </graphicData>
     </ThingDef>
 </Defs>

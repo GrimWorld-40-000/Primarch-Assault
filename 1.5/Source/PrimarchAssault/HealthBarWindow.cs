@@ -1,8 +1,10 @@
 using PrimarchAssault.External;
+using PrimarchAssault.Settings;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace RimworldModding
+namespace PrimarchAssault
 {
     public class HealthBarWindow: Window
     {
@@ -11,6 +13,7 @@ namespace RimworldModding
             doWindowBackground = false;
             doCloseX = false;
             windowRect = new Rect(Current.Camera.scaledPixelWidth / (float)2 - 1000, 30, 2000, 150);
+            draggable = SettingsTabRecord_PrimarchAssault.SettingsRecord.CanHealthbarBeMoved;
             absorbInputAroundWindow = false;
             closeOnAccept = false;
             closeOnCancel = false;
