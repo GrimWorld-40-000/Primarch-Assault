@@ -1,6 +1,6 @@
 <ModMetaData>
 	<name>Grimworld 40,000 - Primarch Assault</name>
-	<author>Clashgore, ThatHitmann</author>
+	<author>Clashgore, ThatHitmann, Abomination</author>
 	<packageId>Grimworld.PrimarchAssault</packageId>
 	<supportedVersions>
       	<li>1.5</li>
@@ -21,6 +21,9 @@
 	<loadAfter>
 		<li>Grimworld.Framework</li>
 		<li>Grimworld.Core</li>
+		<li>HappyPurging.AgeofDarkness</li>
+		<li>grimworld.talonOfTheEmperor</li>
+		<li>Phonicmas.40kGenes</li>
 	</loadAfter>
 
 	<description>
