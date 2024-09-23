@@ -25,8 +25,11 @@
                 <startingTicksToReset>1200</startingTicksToReset>
             </li>
             <li Class="CompProperties_Glower">
-              <glowRadius>5</glowRadius>
-              <glowColor>(239, 234, 74, 80)</glowColor>
+                <glowRadius>5</glowRadius>
+                <glowColor>(239, 234, 74, 80)</glowColor>
+            </li>
+            <li Class="PrimarchAssault.External.CompProperties_Aura">
+                <radius>5</radius>
             </li>
         </comps>
     </ThingDef>

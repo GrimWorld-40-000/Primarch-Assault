@@ -9,58 +9,13 @@
 		<isBad>false</isBad>
 		<stages>
 			<li>
-                <becomeVisible>true</becomeVisible>
+                <becomeVisible>false</becomeVisible>
 				<minSeverity>1</minSeverity>
 				<statFactors>
 					<Flammability>0</Flammability>
 				</statFactors>
 			</li>
 		</stages>
-		
-		<renderNodeProperties>
-			<li>
-				<debugLabel>Champion halo</debugLabel>
-				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-				<parentTagDef>Body</parentTagDef>
-                <texPath>PawnAttachments/Aura1</texPath>
-                <texPathFemale>PawnAttachments/Aura1</texPathFemale>
-                <rotDrawMode>Fresh, Rotting</rotDrawMode>
-                <drawSize>2</drawSize>
-                <drawData>
-                    <defaultData>
-                        <layer>0</layer>
-                        <offset>(0, 0, 0)</offset>
-                    </defaultData>
-                </drawData>
-                <visibleFacing>
-                    <li>North</li>
-                    <li>South</li>
-                    <li>East</li>
-                    <li>West</li>
-                </visibleFacing>
-			</li>
-			<li>
-				<debugLabel>Champion halo</debugLabel>
-				<workerClass>PawnRenderNodeWorker_AttachmentBody</workerClass>
-				<parentTagDef>Body</parentTagDef>
-                <texPath>PawnAttachments/Aura2</texPath>
-                <texPathFemale>PawnAttachments/Aura2</texPathFemale>
-                <rotDrawMode>Fresh, Rotting</rotDrawMode>
-                <drawSize>2</drawSize>
-                <drawData>
-                    <defaultData>
-                        <layer>0</layer>
-                        <offset>(0, 0, 0)</offset>
-                    </defaultData>
-                </drawData>
-                <visibleFacing>
-                    <li>North</li>
-                    <li>South</li>
-                    <li>East</li>
-                    <li>West</li>
-                </visibleFacing>
-			</li>
-		</renderNodeProperties>
 	</HediffDef>
 
 	<HediffDef>
