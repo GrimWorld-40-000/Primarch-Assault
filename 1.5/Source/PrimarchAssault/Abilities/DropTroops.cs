@@ -3,6 +3,7 @@ using System.Linq;
 using RimWorld;
 using PrimarchAssault;
 using Verse;
+using Verse.AI.Group;
 using Verse.Sound;
 
 namespace PrimarchAssault.Abilities
@@ -28,6 +29,7 @@ namespace PrimarchAssault.Abilities
             
             List<Pawn> pawnsToGenerate = CreateWave(parent.pawn.Faction).ToList();
             DropPodUtility.DropThingsNear(parent.pawn.Position, parent.pawn.Map, pawnsToGenerate, faction: parent.pawn.Faction);
+            LordMaker.MakeNewLord(parent.pawn.Faction, new LordJob_AssaultColony(), parent.pawn.Map, pawnsToGenerate);
         }
 
         public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest)

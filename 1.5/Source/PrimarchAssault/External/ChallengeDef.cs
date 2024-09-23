@@ -35,6 +35,22 @@ namespace PrimarchAssault.External
         public List<ChampionEventStage> eventStages;
         public ThingDef championDrop;
 
+        private Color primarchColor;
+
+        public int healthBarX;
+        public int healthBarY;
+        public int healthBarWidth;
+        public int healthBarHeight;
+        public int shieldBarX;
+        public int shieldBarY;
+        public int shieldBarWidth;
+        public int shieldBarHeight;
+        
+        public Rect healthBarRelative => _healthBarRelative ??= new Rect(healthBarX, healthBarY, healthBarWidth, healthBarHeight);
+        private Rect? _healthBarRelative;
+        public Rect shieldBarRelative => _shieldBarRelative ??= new Rect(shieldBarX, shieldBarY, shieldBarWidth, shieldBarHeight);
+        private Rect? _shieldBarRelative;
+        
         public SoundDef announcementSound;
         
         public EffecterDef effectorDef;
@@ -171,7 +187,7 @@ namespace PrimarchAssault.External
             }
         }
 
-        public void SpawnChampion(ChallengeDef phaseTwo, ThingDef championsChampionDrop)
+        public void SpawnChampion(bool isPhaseTwo, ThingDef championsChampionDrop)
         {
             announcementSound.PlayOneShotOnCamera();
             
@@ -208,7 +224,7 @@ namespace PrimarchAssault.External
                 stages.AddRange(eventStages);
             }
             
-            championHediff.SetupHediff(championsChampionDrop, stages, phaseTwo);
+            championHediff.SetupHediff(championsChampionDrop, stages, this, isPhaseTwo);
             champion.health.AddHediff(championHediff);
 
             if (championFlinchSeverity > 0)
@@ -257,8 +273,10 @@ namespace PrimarchAssault.External
             List<Pawn> pawnsToGenerate = CreateWave(escortWavesInPriority.First(), map, faction).ToList();
             pawnsToGenerate.Add(champion);
             allOfFaction.AddRange(pawnsToGenerate);
-            
+
+            //ColorDropPodsNext(primarchColor);
             DropPodUtility.DropThingsNear(epicenter, map, pawnsToGenerate, faction: faction);
+            //ColorDropPodsOnMap(map, primarchColor);
             
             LordMaker.MakeNewLord(faction, new LordJob_AssaultColony(), map, allOfFaction);
             
@@ -302,10 +320,11 @@ namespace PrimarchAssault.External
 
             
             
-            
             if (mustUseDropPods)
             {
+                //ColorDropPodsNext(primarchColor);
                 DropPodUtility.DropThingsNear(spawnCell, map, pawnsToGenerate, faction: faction);
+                //ColorDropPodsOnMap(map, primarchColor);
             }
             else
             {
@@ -328,6 +347,30 @@ namespace PrimarchAssault.External
             eventStages?.DoIf(stage => stage.triggerOnAssaultStart, stage => stage.Apply(null, map));
         }
 
+        private static void ColorDropPodsOnMap(Map map, Color color)
+        {
+            if (!ModLister.AnyFromListActive(new List<string> { "HappyPurging.AgeofDarkness" })) return;
+            foreach (Thing thing in map.listerThings.ThingsOfDef(PADefsOf.GW_SM_DropPodIncomingImperial))
+            {
+                thing.Graphic.color = color;
+
+                //thing.Graphic
+
+                //thing.DrawColor = color;
+
+                //thing.Graphic.graphicInt = this.def.graphicData.GraphicColoredFor(this);
+
+                //Log.Message("1");
+            }
+        }
         
+        
+
+        private static void ColorDropPodsNext(Color color)
+        {
+            if (!ModLister.AnyFromListActive(new List<string> { "HappyPurging.AgeofDarkness" })) return;
+            Traverse.Create(PADefsOf.GW_SM_DropPodIncomingImperial.graphicData).Field("cachedGraphic").SetValue(null);
+            PADefsOf.GW_SM_DropPodIncomingImperial.graphicData.Graphic.color = color;
+        }
     }
 }

@@ -13,17 +13,18 @@ namespace PrimarchAssault.External
     {
         private List<ChampionStage> _stages = new List<ChampionStage>();
         private ThingDef _droppedThing;
-        private ChallengeDef _phaseTwoToQueue;
-
+        private ChallengeDef _challenge;
+        private bool _doesQueuePhaseTwo;
 
 
 
         private List<ChampionStage> _tmpStagesToRemove = new List<ChampionStage>();
-        public void SetupHediff(ThingDef droppedThing, List<ChampionStage> stages, ChallengeDef phaseTwoToQueue = null)
+        public void SetupHediff(ThingDef droppedThing, List<ChampionStage> stages, ChallengeDef challenge, bool doesQueuePhaseTwo = false)
         {
             _droppedThing = droppedThing;
             _stages = stages;
-            _phaseTwoToQueue = phaseTwoToQueue;
+            _challenge = challenge;
+            _doesQueuePhaseTwo = doesQueuePhaseTwo;
         }
 
         public override void ExposeData()
@@ -31,7 +32,8 @@ namespace PrimarchAssault.External
             base.ExposeData();
             Scribe_Collections.Look(ref _stages, "stages", LookMode.Deep);
             Scribe_Defs.Look(ref _droppedThing, "droppedThing");
-            Scribe_Defs.Look(ref _phaseTwoToQueue, "phaseTwoToQueue");
+            Scribe_Defs.Look(ref _challenge, "challenge");
+            Scribe_Values.Look(ref _doesQueuePhaseTwo, "doesQueuePhaseTwo");
         }
 
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
@@ -43,10 +45,10 @@ namespace PrimarchAssault.External
 
             if (_droppedThing != null) GenSpawn.Spawn(_droppedThing, pawn.Position, pawn.Corpse.Map);
 
-            if (_phaseTwoToQueue != null)
+            if (_doesQueuePhaseTwo)
             {
-                GameComponent_ChallengeManager.Instance.StartPhaseTwo(_phaseTwoToQueue);
-                Find.LetterStack.ReceiveLetter("GWPA.EscapedTitle".Translate(), "GWPA.Escaped".Translate(_phaseTwoToQueue.championName), LetterDefOf.ThreatSmall);
+                GameComponent_ChallengeManager.Instance.StartPhaseTwo(_challenge);
+                Find.LetterStack.ReceiveLetter("GWPA.EscapedTitle".Translate(), "GWPA.Escaped".Translate(_challenge.championName), LetterDefOf.ThreatSmall);
             }
             else
             {
@@ -65,12 +67,17 @@ namespace PrimarchAssault.External
             base.Tick();
             float percent = GetChampionStage(out float shieldValue, out float healthValue);
 
+            if (pawn.TryGetComp(out CompGlower glower))
+            {
+                glower.UpdateLit(pawn.Map);
+            }
+            
             if (pawn.TryGetComp(out CompShield shield))
             {
                 shieldValue = shield.Energy / pawn.GetStatValue(StatDefOf.EnergyShieldEnergyMax);
             }
             
-            GameComponent_ChallengeManager.Instance.HealthBar.UpdateIfWilling(pawn.thingIDNumber, healthValue, shieldValue);
+            GameComponent_ChallengeManager.Instance.HealthBar.UpdateIfWilling(pawn.thingIDNumber, healthValue, shieldValue, _challenge.healthBarRelative, _challenge.shieldBarRelative);
             
             
             

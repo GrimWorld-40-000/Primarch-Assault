@@ -158,7 +158,7 @@ namespace PrimarchAssault
             
             if (tickNow <= data.TickToSpawn) return;
             
-            data.ChallengeDef.SpawnChampion(data.IsPhaseTwo? null: data.ChallengeDef, data.IsPhaseTwo? data.ChallengeDef.championDrop: null);
+            data.ChallengeDef.SpawnChampion(data.IsPhaseTwo, data.IsPhaseTwo? data.ChallengeDef.championDrop: null);
             
             QueuedChampions.Remove(data);
         }

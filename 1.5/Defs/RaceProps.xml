@@ -25,7 +25,7 @@
                 <startingTicksToReset>1200</startingTicksToReset>
             </li>
             <li Class="CompProperties_Glower">
-              <glowRadius>2</glowRadius>
+              <glowRadius>5</glowRadius>
               <glowColor>(239, 234, 74, 80)</glowColor>
             </li>
         </comps>

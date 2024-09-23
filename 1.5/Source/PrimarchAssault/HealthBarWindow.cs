@@ -31,36 +31,41 @@ namespace PrimarchAssault
         private float _shieldPercent;
         public ChallengeDef ChallengeDef;
         public int CurrentPawn;
+        private Rect _healthBarRelative;
+        private Rect _shieldBarRelative;
 
         private static readonly Color ShieldColor = new Color(.65f, .78f, 1f);
         private static readonly Color HealthColor = new Color(.81f, .24f, .12f);
+        private static readonly Color ShieldBGColor = new Color(.35f, .4f, .5f);
+        private static readonly Color HealthBGColor = new Color(.4f, .12f, .06f);
         
         public override void DoWindowContents(Rect inRect)
         {
 
-            Rect barRect = new Rect()
+            Rect barRect = new Rect
             {
                 width = 1280,
                 height = 128,
                 center = inRect.center
             };
-            /*{
-                center = inRect.center
-            };*/
 
             if (ChallengeDef.HealthBarIcon == null) return;
-            GUI.DrawTexture(barRect, ChallengeDef.HealthBarIcon);
-            Rect shieldBar = new Rect(barRect.xMin + 100, barRect.yMin + 75, 1080, 10);
-            Rect healthBar = new Rect(barRect.xMin + 100, barRect.yMin + 93, 1080, 10);
-            Widgets.DrawRectFast(shieldBar.LeftPart(_shieldPercent), ShieldColor);
+            Rect shieldBar = new Rect(barRect.xMin + _shieldBarRelative.x, barRect.yMin + _shieldBarRelative.y, _shieldBarRelative.width, _shieldBarRelative.height);
+            Rect healthBar = new Rect(barRect.xMin + _healthBarRelative.x, barRect.yMin + _healthBarRelative.y, _healthBarRelative.width, _healthBarRelative.height);
+            Widgets.DrawRectFast(healthBar, HealthBGColor);
             Widgets.DrawRectFast(healthBar.LeftPart(_healthPercent), HealthColor);
+            Widgets.DrawRectFast(shieldBar, ShieldBGColor);
+            Widgets.DrawRectFast(shieldBar.LeftPart(_shieldPercent), ShieldColor);
+            GUI.DrawTexture(barRect, ChallengeDef.HealthBarIcon);
         }
 
-        public void UpdateIfWilling(int championId, float healthPercent, float shieldPercent)
+        public void UpdateIfWilling(int championId, float healthPercent, float shieldPercent, Rect healthBarRelative, Rect shieldBarRelative)
         {
             if (championId != CurrentPawn) return; 
             _healthPercent = healthPercent;
             _shieldPercent = shieldPercent;
+            _healthBarRelative = healthBarRelative;
+            _shieldBarRelative = shieldBarRelative;
         }
     }
 }
