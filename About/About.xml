@@ -2,6 +2,7 @@
 	<name>Grimworld 40,000 - Primarch Assault</name>
 	<author>Clashgore, ThatHitmann, Abomination</author>
 	<packageId>Grimworld.PrimarchAssault</packageId>
+	<modIconPath IgnoreIfNoMatchingField="True">UI/Icons/PAIconsMod</modIconPath>
 	<supportedVersions>
       	<li>1.5</li>
 	</supportedVersions>
