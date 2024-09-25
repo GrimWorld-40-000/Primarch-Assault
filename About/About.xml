@@ -22,6 +22,7 @@
 		<li>Grimworld.Framework</li>
 		<li>Grimworld.Core</li>
 		<li>HappyPurging.AgeofDarkness</li>
+		<li>HappyPurging.AgeofDarknessLite</li>
 		<li>grimworld.talonOfTheEmperor</li>
 		<li>Phonicmas.40kGenes</li>
 	</loadAfter>
@@ -29,6 +30,11 @@
 	<description>
 		Adds a framework for summoning challenging enemies that give a hefty reward.
 
-		Primarch Assault them by Luis Humanoide on Youtube.
+		With Scattered Sons module:
+			-Summon the Primarchs Lion and Guilliman.
+			
+		Primarch Assault theme by Luis Humanoide on Youtube.
+
+		Coding by ThatHitmann, art by Abomination. Commissioned by Clashgore.
 	</description>
 </ModMetaData>

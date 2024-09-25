@@ -34,8 +34,20 @@ namespace PrimarchAssault.Settings
 			
 			Listing_Standard listingStandard = new Listing_Standard();
 			listingStandard.Begin(rect.ContractedBy(20f));
+
+			bool oldCanBeMoved = SettingsRecord.CanHealthbarBeMoved;
 			
 			listingStandard.CheckboxLabeled("GWPA.HealthbarMoveable".Translate(), ref SettingsRecord.CanHealthbarBeMoved);
+
+			if (oldCanBeMoved != SettingsRecord.CanHealthbarBeMoved)
+			{
+				if (GameComponent_ChallengeManager.Instance != null)
+				{
+					GameComponent_ChallengeManager.Instance.HealthBar.draggable = SettingsRecord.CanHealthbarBeMoved;
+					GameComponent_ChallengeManager.Instance.HealthBar.resizeable = SettingsRecord.CanHealthbarBeMoved;
+				}
+			}
+			
 			
 			List<string> uniqueEventActionNames = new List<string>();
 			
