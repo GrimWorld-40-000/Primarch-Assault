@@ -45,13 +45,14 @@
                 <li MayRequire="Phonicmas.40kGenes">BEWH_Primarch</li>
             </forcedXenotypesInOrder>
             <forcedSpawnFactionsInOrder>
-                <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">GW_SM_AdeptusAstartes</li>
+                <li MayRequire="HappyPurging.AgeofDarkness">GW_SM_AdeptusAstartes</li>
+                <li MayRequire="HappyPurging.AgeofDarknessLite">GW_SM_AdeptusAstartes</li>
                 <li>AncientsHostile</li>
             </forcedSpawnFactionsInOrder>
         </championDetails>
 
         <phaseOneWavesInPriority>
-            <li MayRequire="HappyPurging.AgeofDarkness">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_DA_SniperScout</li>
                     <li>GW_SM_DA_ShotgunScout</li>
@@ -88,7 +89,7 @@
                 <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
-            <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_DA_RangedTier4</li>
                     <li>GW_SM_DA_MeleeTier4</li>
@@ -108,7 +109,7 @@
             </li>
         </phaseTwoWavesInPriority>
         <escortWavesInPriority>
-            <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_DA_RangedTier4</li>
                     <li>GW_SM_DA_MeleeTier4</li>
@@ -221,13 +222,14 @@
                 <li MayRequire="Phonicmas.40kGenes">BEWH_Primarch</li>
             </forcedXenotypesInOrder>
             <forcedSpawnFactionsInOrder>
-                <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">GW_SM_AdeptusAstartes</li>
+                <li MayRequire="HappyPurging.AgeofDarkness">GW_SM_AdeptusAstartes</li>
+                <li MayRequire="HappyPurging.AgeofDarknessLite">GW_SM_AdeptusAstartes</li>
                 <li>AncientsHostile</li>
             </forcedSpawnFactionsInOrder>
         </championDetails>
 
         <phaseOneWavesInPriority>
-            <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_UM_SniperScout</li>
                     <li>GW_SM_UM_ShotgunScout</li>
@@ -264,7 +266,7 @@
                 <wealthCap>500000</wealthCap>
                 <wealthMultiplier>.03</wealthMultiplier>
             </li>
-            <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_UM_RangedTier4</li>
                     <li>GW_SM_UM_MeleeTier4</li>
@@ -284,7 +286,7 @@
             </li>
         </phaseTwoWavesInPriority>
         <escortWavesInPriority>
-            <li MayRequireAnyOf="HappyPurging.AgeofDarkness, HappyPurging.AgeofDarknessLite">
+            <li MayRequireAnyOf="HappyPurging.AgeofDarkness,HappyPurging.AgeofDarknessLite">
                 <pawnKinds>
                     <li>GW_SM_UM_RangedTier4</li>
                     <li>GW_SM_UM_MeleeTier4</li>
