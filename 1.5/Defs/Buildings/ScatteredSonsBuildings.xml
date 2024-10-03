@@ -6,9 +6,10 @@
         <description>Can be used to call primarchs to provoke them into attack your base.</description>
         <thingClass>Building</thingClass>
         <graphicData>
-            <texPath>Things/Building/Misc/CommsConsole</texPath>
+            <texPath>Things/Building/ChallengeBeacon/Primarch_Beacon</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
-            <drawSize>(5,4)</drawSize>
+            <drawSize>(4,4)</drawSize>
+			<drawOffset>(0,0,0.25)</drawOffset>
             <damageData>
                 <rect>(0,0,3,1.8)</rect>
                 <cornerBL>Damage/Corner</cornerBL>
@@ -30,7 +31,7 @@
             <WorkToBuild>2200</WorkToBuild>
             <Flammability>0.6</Flammability>
         </statBases>
-        <size>(3,2)</size>
+        <size>(3,3)</size>
         <building>
             <destroySound>BuildingDestroyed_Metal_Big</destroySound>
         </building>
